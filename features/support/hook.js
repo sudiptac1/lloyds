@@ -6,5 +6,5 @@ Before(function() {
 });
 
 After(function() {
-  //return this.driver.quit();
+  return this.driver.quit();
 });

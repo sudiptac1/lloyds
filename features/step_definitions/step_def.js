@@ -20,7 +20,6 @@ Given("I am in lloyeds bank site", function ss(next) {
 When("I click on Product and services",{timeout: 60 * 1000},function clickProSer(next) {
 var winHandleBefore =this.driver.getWindowHandle();
 this.driver.findElement(webdriver.By.xpath("//li[@class='with-nav2']")).click().then(next);
- //var winHandleBefore =this.driver.getWindowHandle();
 this.driver.switchTo().parentFrame().then(next);
 });
 
@@ -34,8 +33,6 @@ When("I click on Current Accounts", {timeout: 60 * 1000},function clickCurAcc(ne
 });
 
 Then ("I am landed in current accounts page", {timeout: 60 * 1000},function landedCurAcc(next) {
- // var winHandleBefore =this.driver.getWindowHandle();
-//this.driver.switchTo().window(winHandleBefore);
   this.driver.switchTo().parentFrame().then(next);
   this.driver.wait(
   this.driver.findElement(webdriver.By.xpath("//h1[@class='header-text']")).isDisplayed(), 5000)

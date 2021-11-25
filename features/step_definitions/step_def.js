@@ -41,22 +41,26 @@ Then ("I am landed in current accounts page", {timeout: 60 * 1000},function land
   this.driver.findElement(webdriver.By.xpath("//h1[@class='header-text']")).isDisplayed(), 5000)
   this.driver.switchTo().parentFrame().then(next);
   this.driver.wait(until.titleIs('Open a Current Account Online | UK Bank Accounts | Lloyds Bank'), 10000);
-  console.log("CUR PAGE2222");
   this.driver.getTitle().then(function (title) {
     assert.equal(title, "Open a Current Account Online | UK Bank Accounts | Lloyds Bank");
     return title;})
-  console.log("Cur page end 666")
   });
 
-  Then ("There are (\d+) current account in the page", {timeout: 60 * 1000},function CurAccNo(n) {
-  var len = this.driver.findElement(webdriver.By.xpath("//div[@class='col-xs-12 col-sm-4 col-md-4 grid-col']")).then((arr)=>{return arr.length});
-    assert.equal(len,n);     
+  Then ("There are {int} current account in the page", {timeout: 60 * 1000},function CurAccNo(int) {
+  var storeArr = [];
+  this.driver.wait(until.titleIs('Open a Current Account Online | UK Bank Accounts | Lloyds Bank'), 10000)
+  this.driver.findElement(webdriver.By.xpath("//div[@class='col-xs-12 col-sm-4 col-md-4 grid-col']")).then((arr)=>{arr.forEach((it)=>{console.log(it);
+                storeArr.push(it)});
+        });
+    assert.equal(storeArr.length,int);     
   });
 
-  Then ("And the fees of platinum account is £ (\d+) per month", {timeout: 60 * 1000},function feesPlatinum(fee) {
-   var platfee = this.driver.findElement(webdriver.By.xpath("//span[@class='rte-body--large-text']")).then((arr)=>{
-    return arr[2].getText
-      assert.equal(platfee,fee);
+  Then ("the fees of platinum account is £{int} per month", {timeout: 60 * 1000},function feesPlatinum(int) {
+    var storeArr = []; 
+    this.driver.wait(until.titleIs('Open a Current Account Online | UK Bank Accounts | Lloyds Bank'), 10000)
+    this.driver.findElement(webdriver.By.xpath("//span[@class='rte-body--large-text']")).then((arr)=>{
+     arr.forEach((i)=>{console.log(i);
+                  storeArr.push(i.getText())})})
+     assert.equal(storeArr[2],int);
     });
           
-  });
